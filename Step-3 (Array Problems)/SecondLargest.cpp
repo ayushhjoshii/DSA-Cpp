@@ -10,17 +10,17 @@ int Largest(int arr[], int n){
     return max;
 }
 int secLar(int arr[], int n){
-    int sMax = arr[0];
-    int max = arr[0];
-    for(int i = 1; i < n; i++){
+    int max = INT_MIN;
+    int smax = INT_MIN;
+    for(int i = 0; i < n; i++){
         if(arr[i] > max){
-            sMax = max;
+            smax = max;
             max = arr[i];
-        }else if((arr[i] < max) && (arr[i] > sMax)){
-            sMax = arr[i];
+        }else if((arr[i] > smax) && (arr[i] != max)){
+            smax = arr[i];
         }
     }
-    return sMax;
+    return smax;
 }
 int main(){
     cout << "Size of array: ";
