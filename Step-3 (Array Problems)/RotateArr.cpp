@@ -7,18 +7,26 @@ void leftRotateOne(int arr[], int n){
     }
     // arr[n - 1] = temp;
 }
-void RotateKPlaces(vector<int>& arr, int n, int k){
-    vector<int> temp;
-    for(int i = 0; i < k; i++){
-        temp.push_back(arr[i]);
+void reverse(vector<int>& nums, int start, int end){
+    while(start <= end){
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+        start++;
+        end--;
     }
-    for(int i = k; i < n; i++){
-        arr[i - k] = arr[i];
-    }
-    for(int i = n - k; i < n; i++){
-        arr[i] = temp[i - (n - k)];
-    }
-    cout << "size of temp is " << temp.size() << endl;
+}
+void LRotateKPlaces(vector<int>& arr, int n, int k){
+    k = k % n;
+    reverse(arr, 0, k - 1);
+    reverse(arr, k, n - 1);
+    reverse(arr, 0, n - 1);
+}
+void RRotateKPlaces(vector<int>& arr, int n, int k){
+    k = k % n;
+    reverse(arr, 0, n - k - 1);
+    reverse(arr, n - k, n - 1);
+    reverse(arr, 0, n - 1);
 }
 int main(){
     int n;
@@ -34,8 +42,13 @@ int main(){
         cin >> element;
         arr.push_back(element);
     }
-    cout << "After Rotating k places: ";
-    RotateKPlaces(arr, n, k);
+    cout << "After Left rotating k places: ";
+    LRotateKPlaces(arr, n, k);
+    for(auto element : arr){
+        cout << element << " ";
+    }
+    cout << " \nAfter Right rotating k places: ";
+    RRotateKPlaces(arr, n, k);
     // leftRotateOne(arr, n);
     for(auto element : arr){
         cout << element << " ";
