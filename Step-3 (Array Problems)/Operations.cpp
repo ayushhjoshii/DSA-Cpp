@@ -18,6 +18,46 @@ void zerosToEnd(vector<int>& arr, int n){
     }
 }
 
+vector<int> intxnArr(vector<int> arr1, vector<int> arr2){
+
+    //This is the brute force approach to solve this question.
+
+    int n1 = arr1.size();
+    int n2 = arr2.size();
+    // int i = 0;
+    // int j = 0;
+    // vector<int> intxn;
+    // vector<int> vis(n2, 0);
+    // for(int i = 0; i < n1; i++){
+    //     for(int j = 0; j < n2; j++){
+    //         if((arr1[i] == arr2[j]) && (vis[j] == 0)){
+    //             intxn.push_back(arr1[i]);
+    //             break;
+    //         }
+    //         if(arr2[j] > arr1[i]) break;
+    //     }
+    // }
+    // return intxn;
+
+    //Now let's look at the optimal solution to solve this question.
+
+    int i = 0;
+    int j = 0;
+    vector<int> ans;
+    while((i < n1) && (j < n2)){
+        if(arr1[i] == arr2[j]){
+            ans.push_back(arr1[i]);
+            i++;
+            j++;
+        }else if(arr1[i] < arr2[j]){
+            i++;
+        }else{
+            j++;
+        }
+    }
+    return ans;
+}
+
 vector<int> unionOfArr(vector<int> arr1, vector<int> arr2){
     int n1 = arr1.size();
     int n2 = arr2.size();
@@ -75,6 +115,11 @@ int main(){
     
     cout << "Union of arr1 and arr2: ";
     for(int element: unionOfArr(arr1, arr2)){
+        cout << element << " ";
+    }
+
+    cout << "\nIntersection of arr1 and arr2 by optimal solution: ";
+    for(int element: intxnArr(arr1, arr2)){
         cout << element << " ";
     }
 
